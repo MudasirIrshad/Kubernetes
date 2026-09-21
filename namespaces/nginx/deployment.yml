@@ -1,0 +1,5 @@
+kind: Deployment
+apiVersion: app/v1
+metadata:
+  name: nginx-deployment
+  
