@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notes-app-deployment
+  labels:
+    app: notes-app
+  namespace: notes-app-and-nginx-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notes-app
+  template:
+    metadata:
+      labels:
+        app: notes-app
+    spec:
+      containers:
+        - name: notes-app
+          image: mudasirirshad/notes-app-k8s:latest
+          ports:
+            - containerPort: 8080
+          command: ["python", "manage.py", "runserver", "0.0.0.0:8080"]
+          env:
+            - name: DB_NAME
+              value: "test_db"
+            - name: DB_USER
+              value: "root"
+            - name: DB_PASSWORD
+              value: "root"
+            - name: DB_HOST
+              value: "192.168.49.1"
+            - name: DB_PORT
+              value: "3306"

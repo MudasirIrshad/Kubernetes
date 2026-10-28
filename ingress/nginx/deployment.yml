@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: notes-app-and-nginx-namespace
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: nginx-label
+
+  template:
+    metadata:
+      labels:
+        app: nginx-label
+
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
