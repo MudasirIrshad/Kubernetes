@@ -2,7 +2,7 @@ kind: Pod
 apiVersion: v1
 metadata:
   name: nginx-pod
-  namespace: nginx
+  namespace: notes-app-and-nginx-namespace
   labels:
     app: nginx-label
 spec:

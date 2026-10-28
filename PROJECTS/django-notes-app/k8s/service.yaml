@@ -2,7 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: notes-app-service
-  namespace: notes-app
+  namespace: notes-app-and-nginx-namespace #this is to understand how ingress works and handle multiple services routing
 spec:
   selector:
     app: notes-app
