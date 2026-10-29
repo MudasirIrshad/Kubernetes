@@ -1,0 +1,19 @@
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: mysql-statefulset
+  namespace: mysql
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mysql
+   templates:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: myql
+        image: mysql:latest
