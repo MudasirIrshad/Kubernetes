@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: nginx
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: nginx-label
+
+  template:
+    metadata:
+      labels:
+        app: nginx-label
+
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 8080
+          livenessProbe:
+            httpGet:
+                path: /
+                port: 8080
+          readinessProbe:
+            httpGet:
+                path: /
+                port: 8080
+          resources:
+          # WE DECLARE HERE THE MINIMUM RESOURCES REQUIRED
+            requests:
+                cpu: 100m
+                memory: 128Mi
+          # WE DECLARE HERE THE MAXIMUM RESOURCES A POD CAN HAVE
+            limits:
+                cpu: 200m
+                memory: 256Mi
+        
