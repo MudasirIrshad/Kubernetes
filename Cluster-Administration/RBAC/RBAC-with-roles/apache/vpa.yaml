@@ -1,0 +1,43 @@
+
+# This tells Kubernetes what type of object we want to create.
+# We are creating a VerticalPodAutoscaler (VPA).
+kind: VerticalPodAutoscaler
+
+# This tells Kubernetes which VPA API version we are using.
+apiVersion: autoscaling.k8s.io/v1
+
+# This section contains basic information about our VPA.
+metadata:
+
+    # This is the name we are giving to our VPA.
+    # We will use this name when checking or describing it.
+    name: apache-vpa
+
+    # This tells Kubernetes where to create our VPA.
+    # Our Apache application is running inside the apache namespace.
+    namespace: apache
+
+# This is where we tell VPA what to do.
+spec:
+
+    # targetRef tells VPA which application it should monitor.
+    targetRef:
+
+        # This is the name of our Apache Deployment.
+        # VPA will monitor the pods created by this Deployment.
+        name: apache-deployment
+
+        # This tells Kubernetes that our target is using the apps/v1 API.
+        apiVersion: apps/v1
+
+        # This tells VPA that the target is a Deployment.
+        # It could also target other supported workload types.
+        kind: Deployment
+
+    # This section controls how VPA applies its recommendations.
+    updatePolicy:
+
+        # Auto means VPA can automatically adjust container resources.
+        # If resource requests need to change, VPA can recreate pods
+        # with the newly recommended resource values.
+        updateMode: "Auto"
