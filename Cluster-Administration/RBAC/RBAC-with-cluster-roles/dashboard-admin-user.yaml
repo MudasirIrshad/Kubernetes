@@ -1,0 +1,6 @@
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+    name: admin-user
+    namespace: kubernetes-dashboard #  WE NEED TO ALWAYS ADD THIS SPECIFIC NAMESPACE FOR DASHBOARD ADMIN USER
+    
